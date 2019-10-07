@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leonardo Guarnieri de Bastiani - CV</title>
+  <style>
+    body, html {
+      font-family: 'Times New Roman';
+      font-size: 11pt;
+      text-align: justify;
+    }
+    .bigger {
+      font-size: 127.3%;
+    }
+    .title {
+      font-weight: bold;
+    }
+    .center {
+      text-align: center;
+    }
+
+    /* A link that has not been visited */
+    a:link {
+      color: black;
+    }
+
+    /* A link that has been visited */
+    a:visited {
+      color: black;
+    }
+
+    /* A link that is hovered on */
+    a:hover {
+      color: black;
+    }
+
+    /* A link that is selected */
+    a:active {
+      color: black;
+    }
+
+    #bar1 {
+      border-bottom: 2px solid black;
+      margin-top: 10pt;
+      margin-bottom: 5pt;
+    }
+
+    .container {
+      margin-left: 6%;
+      margin-right: 6%;
+    }
+
+    .sec {
+      margin-top: 10pt;
+    }
+
+    .sec-title {
+      font-size: 12pt;
+      border-bottom: 1px solid black;
+      margin-bottom: 10pt;
+    }
+
+    .sec-table {
+      width: 100%;
+      padding-left: 10%;
+      margin-bottom: 13pt;
+      page-break-inside: avoid;
+    }
+
+    .sec-table-minor {
+      margin-bottom: 0;
+    }
+
+    .table-period {
+      text-align: right;
+      white-space: nowrap;
+    }
+    .table-content {
+      white-space: pre-line;
+    }
+    .table-title {
+      padding-right: 15px;
+    }
+
+    .list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .list-li {
+      padding-left: 3em;
+      text-indent: -1em;
+    }
+
+    .list-li:before {
+      content: "◦";
+      font-size: 10px;
+      padding-right: 20pt;
+    }
+
+    @media print {
+      .no-print, .no-print * {
+        display: none !important;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+  <div id="app">
+
+    <div class="container center">
+      <div class="no-print">
+        <button v-for="o in overrides" v-if="!isOverrided" v-on:click="overrideHandle(o)">{{ o.name }}</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <table class="sec-table">
+        <tr><td class="title bigger">{{ name }}</td></tr>
+        <tr><td>{{ address }}</td></tr>
+        <tr><td>
+          <i class="fas fa-at"></i> {{ email }} |
+          <span v-if="whatsapp == phone"><i class="fas fa-phone"></i><i class="fab fa-whatsapp"></i> {{ phone }}</span>
+          <span v-else><i class="fas fa-phone"></i> {{ phone }} | <i class="fab fa-whatsapp"></i> {{ whatsapp }}</span>
+        </td></tr>
+        <tr v-if="!isOverrided && github"><td><i class="fab fa-github"></i> <a :href="github" target="_blank">{{github}}</a></td></tr>
+      </table>
+    </div>
+
+    <div class="sec">
+      <div class="container">
+        <table class="sec-table bigger">
+          <tr v-for="a in aboutMe"><td v-html="a"></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <sec v-if="experiences" :obj="experiences"></sec>
+    <sec v-if="education"   :obj="education"></sec>
+    <sec v-if="activities"  :obj="activities"></sec>
+    <sec v-if="skills"      :obj="skills"></sec>
+    <sec v-if="volunteer"   :obj="volunteer"></sec>
+  </div>
+
+  <template name="sec">
+    <div class="sec">
+      <div class="container">
+        <div class="sec-title"><b><i v-html="title"></i></b></div>
+        <table :class="['sec-table', l.minor && 'sec-table-minor']" v-for="l in list">
+          <tr v-if="l.upperTitle">
+            <td colspan="2"><b v-html="l.upperTitle"></b></td>
+          </tr>
+          <tr>
+            <td class="table-title">
+              <b v-html="l.title"></b>
+              <span v-html="l.afterTitle"></span>
+              <span v-if="l.minor" v-html="' – ' + l.accomplishments.join(', ')"></span>
+            </td>
+            <td class="table-period" valign="top" v-html="l.period"></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div v-if="l.content" class="table-content" v-html="l.content"></div>
+              <div v-if="l.accomplishments && !l.minor">
+                <div v-if="!l.wtMainAccomplishments"><i>Main Accomplishments:</i></div>
+                <list :array="l.accomplishments"></list>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </template>
+
+  <template name="list">
+    <ul class="list">
+      <li v-for="a in array" class="list-li">{{a}}</li>
+    </ul>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
+  <script>
+    var getTemplate = (name) => document.getElementsByName(name).item(0)
+
+    Vue.component('sec', {
+      template: getTemplate('sec'),
+      props: ['obj'],
+      data() {
+        return this.obj
+      },
+    })
+
+    Vue.component('list', {
+      template: getTemplate('list'),
+      props: ['array'],
+    })
+
+    var now = new Date()
+    var birthday = new Date(1994, 3, 15)
+    var age = (new Date(now - birthday)).getFullYear() - 1970;
+
+    let data = {
+      name: 'Leonardo Guarnieri de Bastiani',
+      address: 'Rua Dona Virgínia Ferraz de Almeida Prado, 87, Jaú, São Paulo, Brazil',
+      email: 'leonardo.bastiani@usp.br',
+      phone: '+55 14 99688-7074',
+      whatsapp: '+55 14 99688-7074',
+      github: 'https://github.com/leobastiani/CV',
+      age,
+      isOverrided: false,
+      aboutMe: [
+        `<b>+ Started to program</b> since I was 14 years old`,
+        `<b>+ I have worked remotely</b> since 2015`,
+        `<b>+ Good learning curve</b>, judicious in <b>quality</b> and <b>responsible</b>`,
+      ],
+      education: {
+        title: 'Education',
+        list: [{
+          title: 'International School of English – ISE Ireland',
+          afterTitle: ', Dublin, Ireland',
+          period: 'Mar/2019 – Sep/2019',
+          content: 'English classes',
+        },{
+          title: 'University of São Paulo – USP',
+          afterTitle: ', São Carlos, SP, Brazil',
+          period: '2014 – 2019',
+          content: 'Computer Engineering',
+        },{
+          title: 'EasyComp – IT courses',
+          afterTitle: ', Jaú, SP, Brazil',
+          period: '2009 – 2010',
+          content: 'Corel Draw, Photoshop, InDesign, Marketing, Adobe Flash and Fireworks, Programming logic, Visual Basic, Delphi',
+        },{
+          title: 'CEBRAC – IT courses',
+          afterTitle: ', Jaú, SP, Brazil',
+          period: '2007 – 2008',
+          content: 'Hardware, Web Designer',
+        },],
+      },
+      experiences: {
+        title: 'Experiences',
+        list: [{
+          title: 'Optimise Logistics',
+          afterTitle: ' – Remotely',
+          period: 'Apr/2019 – Oct/2019',
+          content: `Web Designer and Web Developer\nProgrammer of optimiseco.com`,
+          accomplishments: [
+            'Projects integrated with Ruby on Rails, jQuery, RSpec, Capybara, CircleCI and GitHub',
+          ],
+        },{
+          title: 'VpEvents',
+          afterTitle: ' – Remotely',
+          period: 'Dec/2017 – Jan/2019',
+          content: `Web Designer and Web Developer\nProgrammer of vpeventos.com and faiufscar.com`,
+          accomplishments: [
+            'Projects integrated with Docker, PHP, Vue and Node.js',
+          ],
+        }],
+      },
+      volunteer: {
+        title: 'Volunteer works',
+        list: [{
+          title: 'APAE',
+          afterTitle: ' – Association of Parents and Friends of Disabled People',
+          period: 'Jan/2010 – Dec/2011',
+          content: `Guitar playing for elderly disabled people at APAE of Jaú, São Paulo`,
+          accomplishments: [
+            'Created activities with the teacher',
+            'Interacted with disabled people and learn more from them',
+          ],
+        },{
+          title: 'IT teacher',
+          afterTitle: ' – EasyComp',
+          period: 'Aug/2010 – Nov/2010',
+          content: `Working as a computer teacher volunteer on EasyComp`,
+          accomplishments: [
+            'Learned a lot about computer science in general to teach',
+          ],
+        },],
+      },
+      skills: {
+        title: 'Skills',
+        list: [{
+          title: 'Languages: ',
+          afterTitle: 'Native Portuguese, Professional working proficiency English',
+        },{
+          title: 'Programming: ',
+          afterTitle: 'C and C++, C#, Python, Flask, Django, JavaScript, jQuery, Vue.Js, React, Angular, Java, PHP and Laravel, Ruby on Rails, SQL, Batch (.bat), Matlab, Linux, Android, Git, Microsoft Office, Embedded Systems, Raspberry Pi, Arduino, CSS and Bootstrap, Adobe Photoshop',
+        },{
+          title: 'Relevant Disciplines: ',
+          afterTitle: 'Software Engineering, Databases, Network, Computer Architecture, Artificial Intelligence, Bio-inspired Computing, Embedded Systems, Electronic Circuits, Microprocessors and their applications and Principles of Economy',
+        },],
+      },
+      activities: {
+        title: 'Activities',
+        list: [{
+          title: 'WebPoem',
+          period: 'Aug/2017 – Jul/2018',
+          upperTitle: 'Scientific Initiation Projects funded by Brazilian Government',
+          content: `The project of scientific initiation deals with the creation of a program called WebPoem, capable of interpreting an input file in a (semi-)natural language in Brazilian Portuguese that executes tasks in a web browser, allowing an automation process. This project also has its applications studied for researches in the Sucupira platform, part of the site capes.gov.br.`,
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'Python, JavaScript, Google chrome extension and natural language interpreter.',
+          ],
+        },{
+          title: 'autoLattes',
+          period: 'Aug/2016 – Jul/2017',
+          content: `The objective of this scientific initiation project is to develop a tool that will automatically fill Lattes curricula, inserting or correcting new information.`,
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'Google Chrome extension and JavaScript.',
+          ],
+        },{
+          title: 'ScriptLattesDiff',
+          period: 'Aug/2015 – Jul/2016',
+          content: `The project deals with analysis of temporal relations and analysis of academic curriculum, more specifically, on the Lattes curriculum. The Lattes Platform is online and maintains a standard of information contained in it. You can retrieve information easily from it. The proposed system, called ScriptLattesDiff, can differentiate curricula in two or more periods of time.`,
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'Python, PHP, JavaScript and maintain another open-source project.',
+          ],
+        },{
+          title: 'DoorIOT',
+          minor: true,
+          upperTitle: 'Other projects in GitHub',
+          afterTitle: ' – <a href="https://youtu.be/Z7Stkxxhnho">https://youtu.be/Z7Stkxxhnho</a>',
+          period: '2019',
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'A project to open doors using a smartphone',
+          ],
+        },{
+          title: 'Final paper',
+          minor: true,
+          period: '2018',
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'Final project for graduation that uses bio-inspired computation',
+          ],
+        },{
+          title: 'raspberrypi-snes-controller-online',
+          minor: true,
+          afterTitle: ' – <a href="https://youtu.be/QjcWyacHNOM">https://youtu.be/QjcWyacHNOM</a>',
+          period: '2017',
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'Forked from helloiamjonas/raspberrypi-nes-controller that works with a SNES controller instead',
+          ],
+        },{
+          title: 'Invincible Tic Tac Toe IA',
+          minor: true,
+          afterTitle: ' – <a href="https://github.com/leobastiani/JogoDaVelha">https://github.com/leobastiani/JogoDaVelha</a>',
+          period: '2016',
+          wtMainAccomplishments: true,
+          accomplishments: [
+            `Play Tic Tac Toe against an invincible machine. Made in SWI-Prolog`,
+          ],
+        },{
+          title: 'LeoCodeIntel',
+          minor: true,
+          afterTitle: ' – <a href="https://github.com/leobastiani/LeoCodeIntel">https://github.com/leobastiani/LeoCodeIntel</a>',
+          period: '2015',
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'A plugin for Sublime Text 3 that autocompletes C, C++, Java, JavaScript, Python and HTML',
+          ],
+        },{
+          title: 'Misc-C',
+          minor: true,
+          afterTitle: ' – <a href="https://github.com/leobastiani/misc-c">https://github.com/leobastiani/misc-c</a>',
+          period: '2014',
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'Miscellaneous functions in C',
+          ],
+        },{
+          title: '2048 game',
+          minor: true,
+          afterTitle: ' – <a href="https://github.com/leobastiani/2048">https://github.com/leobastiani/2048</a>',
+          period: '2014',
+          wtMainAccomplishments: true,
+          accomplishments: [
+            'First project for graduation, written in C',
+          ],
+        },],
+      },
+
+      overrides: [],
+    }
+
+    var app = new Vue({
+      el: '#app',
+      data,
+      methods: {
+        overrideHandle({name, fn}) {
+          document.title = 'Leonardo Guarnieri de Bastiani - '+name
+          this.isOverrided = true
+          fn.call(this)
+        }
+      }
+    })
+
+    function registerOverride(name, fn) {
+      app.overrides.push({name, fn})
+    }
+  </script>
+</body>
+</html>
