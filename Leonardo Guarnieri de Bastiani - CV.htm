@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Leonardo Guarnieri de Bastiani - CV</title>
   <style>
-    body, html {
+    body,
+    html {
       font-family: 'Times New Roman';
       font-size: 11pt;
       text-align: justify;
     }
+
     .bigger {
       font-size: 127.3%;
     }
+
     .title {
       font-weight: bold;
     }
+
     .center {
       text-align: center;
     }
@@ -74,9 +79,11 @@
       text-align: right;
       white-space: nowrap;
     }
+
     .table-content {
       white-space: pre-line;
     }
+
     .table-title {
       padding-right: 15px;
     }
@@ -99,13 +106,16 @@
     }
 
     @media print {
-      .no-print, .no-print * {
+      .no-print,
+      .no-print * {
         display: none !important;
       }
     }
   </style>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
+
 <body>
   <div id="app">
 
@@ -117,30 +127,44 @@
 
     <div class="container">
       <table class="sec-table">
-        <tr><td class="title bigger">{{ name }}</td></tr>
-        <tr><td>{{ address }}</td></tr>
-        <tr><td>
-          <i class="fas fa-at"></i> {{ email }} |
-          <span v-if="whatsapp == phone"><i class="fas fa-phone"></i><i class="fab fa-whatsapp"></i> {{ phone }}</span>
-          <span v-else><i class="fas fa-phone"></i> {{ phone }} | <i class="fab fa-whatsapp"></i> {{ whatsapp }}</span>
-        </td></tr>
-        <tr v-if="!isOverrided && github"><td><i class="fab fa-github"></i> <a :href="github" target="_blank">{{github}}</a></td></tr>
+        <tr>
+          <td class="title bigger">{{ name }}</td>
+        </tr>
+        <tr>
+          <td>{{ address }}</td>
+        </tr>
+        <tr>
+          <td>
+            <i class="fas fa-at"></i> {{ email }} |
+            <span v-if="whatsapp == phone"><i class="fas fa-phone"></i><i class="fab fa-whatsapp"></i>
+              {{ phone }}
+            </span>
+            <span v-else><i class="fas fa-phone"></i> {{ phone }} | <i class="fab fa-whatsapp"></i>
+              {{ whatsapp }}
+            </span>
+          </td>
+        </tr>
+        <tr v-if="!isOverrided && github">
+          <td><i class="fab fa-github"></i> <a :href="github" target="_blank">{{github}}</a></td>
+        </tr>
       </table>
     </div>
 
     <div class="sec">
       <div class="container">
         <table class="sec-table bigger">
-          <tr v-for="a in aboutMe"><td v-html="a"></td></tr>
+          <tr v-for="a in aboutMe">
+            <td v-html="a"></td>
+          </tr>
         </table>
       </div>
     </div>
 
     <sec v-if="experiences" :obj="experiences"></sec>
-    <sec v-if="education"   :obj="education"></sec>
-    <sec v-if="activities"  :obj="activities"></sec>
-    <sec v-if="skills"      :obj="skills"></sec>
-    <sec v-if="volunteer"   :obj="volunteer"></sec>
+    <sec v-if="education" :obj="education"></sec>
+    <sec v-if="activities" :obj="activities"></sec>
+    <sec v-if="skills" :obj="skills"></sec>
+    <sec v-if="volunteer" :obj="volunteer"></sec>
   </div>
 
   <template name="sec">
@@ -221,17 +245,17 @@
           afterTitle: ', Dublin, Ireland',
           period: 'Mar/2019 – Sep/2019',
           content: 'English classes',
-        },{
+        }, {
           title: 'University of São Paulo – USP',
           afterTitle: ', São Carlos, SP, Brazil',
           period: '2014 – 2019',
           content: 'Computer Engineering',
-        },{
+        }, {
           title: 'EasyComp – IT courses',
           afterTitle: ', Jaú, SP, Brazil',
           period: '2009 – 2010',
           content: 'Corel Draw, Photoshop, InDesign, Marketing, Adobe Flash and Fireworks, Programming logic, Visual Basic, Delphi',
-        },{
+        }, {
           title: 'CEBRAC – IT courses',
           afterTitle: ', Jaú, SP, Brazil',
           period: '2007 – 2008',
@@ -248,7 +272,7 @@
           accomplishments: [
             'Projects integrated with Ruby on Rails, jQuery, RSpec, Capybara, CircleCI and GitHub',
           ],
-        },{
+        }, {
           title: 'VpEvents',
           afterTitle: ', São Carlos, SP, Brazil – Remotely',
           period: 'Dec/2017 – Jan/2019',
@@ -269,7 +293,7 @@
             'Created activities with the teacher',
             'Interacted with disabled people and learn more from them',
           ],
-        },{
+        }, {
           title: 'IT teacher',
           afterTitle: ' – EasyComp',
           period: 'Aug/2010 – Nov/2010',
@@ -284,10 +308,10 @@
         list: [{
           title: 'Languages: ',
           afterTitle: 'Native Portuguese, Professional working proficiency English',
-        },{
+        }, {
           title: 'Programming: ',
           afterTitle: 'C and C++, C#, Python, Flask, Django, JavaScript, jQuery, Vue.Js, React, Angular, Java, PHP and Laravel, Ruby on Rails, SQL, Batch (.bat), Matlab, Linux, Android, Git, Microsoft Office, Embedded Systems, Raspberry Pi, Arduino, CSS and Bootstrap, Adobe Photoshop',
-        },{
+        }, {
           title: 'Relevant Disciplines: ',
           afterTitle: 'Software Engineering, Databases, Network, Computer Architecture, Artificial Intelligence, Bio-inspired Computing, Embedded Systems, Electronic Circuits, Microprocessors and their applications and Principles of Economy',
         },],
@@ -303,7 +327,7 @@
           accomplishments: [
             'Python, JavaScript, Google chrome extension and natural language interpreter.',
           ],
-        },{
+        }, {
           title: 'autoLattes',
           period: 'Aug/2016 – Jul/2017',
           content: `The objective of this scientific initiation project is to develop a tool that will automatically fill Lattes curricula, inserting or correcting new information.`,
@@ -311,7 +335,7 @@
           accomplishments: [
             'Google Chrome extension and JavaScript.',
           ],
-        },{
+        }, {
           title: 'ScriptLattesDiff',
           period: 'Aug/2015 – Jul/2016',
           content: `The project deals with analysis of temporal relations and analysis of academic curriculum, more specifically, on the Lattes curriculum. The Lattes Platform is online and maintains a standard of information contained in it. You can retrieve information easily from it. The proposed system, called ScriptLattesDiff, can differentiate curricula in two or more periods of time.`,
@@ -319,7 +343,7 @@
           accomplishments: [
             'Python, PHP, JavaScript and maintain another open-source project.',
           ],
-        },{
+        }, {
           title: 'DoorIOT',
           minor: true,
           upperTitle: 'Other projects in GitHub',
@@ -329,7 +353,7 @@
           accomplishments: [
             'A project to open doors using a smartphone',
           ],
-        },{
+        }, {
           title: 'Final paper',
           minor: true,
           period: '2018',
@@ -337,7 +361,7 @@
           accomplishments: [
             'Final project for graduation that uses bio-inspired computation',
           ],
-        },{
+        }, {
           title: 'raspberrypi-snes-controller-online',
           minor: true,
           afterTitle: ' – <a href="https://youtu.be/QjcWyacHNOM">https://youtu.be/QjcWyacHNOM</a>',
@@ -346,7 +370,7 @@
           accomplishments: [
             'Forked from helloiamjonas/raspberrypi-nes-controller that works with a SNES controller instead',
           ],
-        },{
+        }, {
           title: 'Invincible Tic Tac Toe IA',
           minor: true,
           afterTitle: ' – <a href="https://github.com/leobastiani/JogoDaVelha">https://github.com/leobastiani/JogoDaVelha</a>',
@@ -355,7 +379,7 @@
           accomplishments: [
             `Play Tic Tac Toe against an invincible machine. Made in SWI-Prolog`,
           ],
-        },{
+        }, {
           title: 'LeoCodeIntel',
           minor: true,
           afterTitle: ' – <a href="https://github.com/leobastiani/LeoCodeIntel">https://github.com/leobastiani/LeoCodeIntel</a>',
@@ -364,7 +388,7 @@
           accomplishments: [
             'A plugin for Sublime Text 3 that autocompletes C, C++, Java, JavaScript, Python and HTML',
           ],
-        },{
+        }, {
           title: 'Misc-C',
           minor: true,
           afterTitle: ' – <a href="https://github.com/leobastiani/misc-c">https://github.com/leobastiani/misc-c</a>',
@@ -373,7 +397,7 @@
           accomplishments: [
             'Miscellaneous functions in C',
           ],
-        },{
+        }, {
           title: '2048 game',
           minor: true,
           afterTitle: ' – <a href="https://github.com/leobastiani/2048">https://github.com/leobastiani/2048</a>',
@@ -392,8 +416,8 @@
       el: '#app',
       data,
       methods: {
-        overrideHandle({name, fn}) {
-          document.title = 'Leonardo Guarnieri de Bastiani - '+name
+        overrideHandle({ name, fn }) {
+          document.title = 'Leonardo Guarnieri de Bastiani - ' + name
           this.isOverrided = true
           fn.call(this)
         }
@@ -401,8 +425,9 @@
     })
 
     function registerOverride(name, fn) {
-      app.overrides.push({name, fn})
+      app.overrides.push({ name, fn })
     }
   </script>
 </body>
+
 </html>
