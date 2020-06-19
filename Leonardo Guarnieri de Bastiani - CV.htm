@@ -9,6 +9,7 @@
       font-family: 'Times New Roman';
       font-size: 11pt;
       text-align: justify;
+      margin: 0;
     }
 
     .bigger {
@@ -43,12 +44,6 @@
       color: black;
     }
 
-    #bar1 {
-      border-bottom: 2px solid black;
-      margin-top: 10pt;
-      margin-bottom: 5pt;
-    }
-
     .container {
       margin-left: 6%;
       margin-right: 6%;
@@ -69,6 +64,10 @@
       padding-left: 10%;
       margin-bottom: 13pt;
       page-break-inside: avoid;
+    }
+
+    #app>*:last-child .sec-table:last-of-type {
+      margin-bottom: 0;
     }
 
     .sec-table-minor {
@@ -106,6 +105,7 @@
     }
 
     @media print {
+
       .no-print,
       .no-print * {
         display: none !important;
@@ -177,8 +177,7 @@
           </tr>
           <tr>
             <td class="table-title">
-              <b v-html="l.title"></b>
-              <span v-html="l.afterTitle"></span>
+              <b v-html="l.title"></b><span v-html="l.afterTitle"></span>
               <span v-if="l.minor" v-html="' – ' + l.accomplishments.join(', ')"></span>
             </td>
             <td class="table-period" valign="top" v-html="l.period"></td>
@@ -265,12 +264,20 @@
       experiences: {
         title: 'Experiences',
         list: [{
+          title: 'Consultant for exchange students going to Ireland',
+          afterTitle: ', Project Owner – Remotely',
+          period: 'Oct/2019',
+          content: `A project to automates immigrants on their the visa process in Ireland`,
+          accomplishments: [
+            'Projects integrated with Node.js, MongoDB, Jest, Travis CI and GitHub',
+          ],
+        }, {
           title: 'Optimise Logistics',
           afterTitle: ', Dublin, Ireland – Remotely',
           period: 'Apr/2019 – Oct/2019',
           content: `Web Designer and Web Developer\nProgrammer of optimiseco.com`,
           accomplishments: [
-            'Projects integrated with Ruby on Rails, jQuery, RSpec, Capybara, CircleCI and GitHub',
+            'Projects integrated with Ruby on Rails, jQuery, React, Webpack, GraphQL, Postgres, RSpec, Capybara, CircleCI and GitHub',
           ],
         }, {
           title: 'VpEvents',
